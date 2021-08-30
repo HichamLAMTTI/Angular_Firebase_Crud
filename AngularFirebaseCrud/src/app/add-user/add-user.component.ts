@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-add-user',
@@ -15,7 +17,15 @@ export class AddUserComponent implements OnInit {
   em = "";
   tel = ""; 
 
-  constructor(private fire: AngularFirestore, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private fire: AngularFirestore, private snackBar: MatSnackBar, private router: Router, private angularAuth: AngularFireAuth) {
+    this.angularAuth.auth.onAuthStateChanged((user) => {
+      if(user){
+
+      }else{
+        this.router.navigate(['/login']);
+      }
+    })
+   }
 
   ngOnInit(): void {
   }

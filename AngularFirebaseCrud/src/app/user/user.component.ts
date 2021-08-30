@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-user',
@@ -34,7 +36,14 @@ export class UserComponent implements OnInit {
   
 
 
-  constructor(private fire: AngularFirestore, private router: Router, private snackBar: MatSnackBar) {
+  constructor(private fire: AngularFirestore, private router: Router, private snackBar: MatSnackBar, private angularAuth: AngularFireAuth) {
+    this.angularAuth.auth.onAuthStateChanged((user) => {
+      if(user){
+
+      }else{
+        this.router.navigate(['/login']);
+      }
+    });
     
     this.fire.firestore.collection("Users").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -45,8 +54,8 @@ export class UserComponent implements OnInit {
         this.singleUser.email = doc.data().email;
         this.singleUser.adresse = doc.data().adresse;
         this.listUsers.push(JSON.parse(JSON.stringify(this.singleUser)));
-      })
-    })
+      });
+    });
     
   }
 
