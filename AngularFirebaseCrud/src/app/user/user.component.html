@@ -1,0 +1,41 @@
+<div>
+    <app-navbar></app-navbar>
+
+    <br/><br/><br/>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <button (click)="addButton()" mat-raised-button type="button" color="primary">Add User</button>
+        </div>
+      </div>
+    </div>
+
+    <br/><br/><br/>
+    <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of listUsers; let i = index">
+              <td *ngIf="!user.isEdit">{{user.prenom}}</td> <td *ngIf="user.isEdit"><input type="text" #boxPrenom (keyup)="getEditPrenom(boxPrenom.value)"/></td>
+              <td *ngIf="!user.isEdit">{{user.nom}}</td> <td *ngIf="user.isEdit"><input type="text" #boxNom (keyup)="getEditNom(boxNom.value)"/></td>
+              <td *ngIf="!user.isEdit">{{user.tel}}</td> <td *ngIf="user.isEdit"><input type="text" #boxTel (keyup)="getEditTel(boxTel.value)"/></td>
+              <td *ngIf="!user.isEdit">{{user.email}}</td> <td *ngIf="user.isEdit"><input type="text" #boxEmail (keyup)="getEditEmail(boxEmail.value)"/></td>
+              <td *ngIf="!user.isEdit">{{user.adresse}}</td> <td *ngIf="user.isEdit"><input type="text" #boxAdresse (keyup)="getEditAdresse(boxAdresse.value)"/></td>
+              <td *ngIf='user.id != "" '><button (click)="editUser(user)" mat-raised-button class="btn btn-primary btn-xs">Edit</button><!--<mat-icon>build</mat-icon>-->
+                <button *ngIf="user.isEdit" (click)="cancelButton(user.isEdit)" mat-raised-button>Cancel</button>
+                <button (click)="deleteUser(user.id)" mat-raised-button class="btn btn-danger btn-xs">Delete</button><!--<mat-icon>delete</mat-icon></td>-->
+            </tr>
+        </tbody>
+      </table>
+    </div>
+    
+</div>

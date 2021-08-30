@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<br/><br/><br/>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <button (click)="showUsers()" mat-raised-button type="button" color="primary">Show All Users</button>
+        </div>
+    </div>
+<div>
+<br/><br/><br/><br/>
+<div fxLayoutAlign="center center" fxFlexFill class="divLogin">
+    <mat-card fxFlex="25">
+        <mat-toolbar color="primary">Add User</mat-toolbar>
+        <form fxLayoutAlign="stretch" fxLayout="column" class="formLogin">  
+            <mat-form-field>
+                <input name="prenom" #boxPrenom matInput placeholder="First Name *" (keyup)="getUserInputFirstName(boxPrenom.value)">
+            </mat-form-field>
+  
+            <mat-form-field>
+                <input name="nom" #boxNom matInput placeholder="Last Name *" (keyup)="getUserInputLastName(boxNom.value)">
+            </mat-form-field>
+  
+            <mat-form-field>
+              <input name="adresse" #boxAdresse matInput placeholder="Address *" (keyup)="getUserInputAdress(boxAdresse.value)">
+          </mat-form-field>
+  
+          <mat-form-field>
+              <input name="email" #boxEmail matInput placeholder="Email *" (keyup)="getUserInputEmail(boxEmail.value)">
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input name="tel" #boxPhone matInput placeholder="Phone *" (keyup)="getUserInputPhone(boxPhone.value)">
+        </mat-form-field>
+  
+            <button [disabled]="pr == '' || no == '' || adr == '' || tel == '' || em == ''" (click)="addUser()" mat-raised-button type="button">Add user</button>
+        </form>
+    </mat-card>
+</div>
+  
